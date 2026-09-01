@@ -102,6 +102,36 @@ export const dict = {
   "footer.rights": { ar: "جميع الحقوق محفوظة", en: "All rights reserved" },
   "common.currency": { ar: "ج.م", en: "EGP" },
   "common.back": { ar: "رجوع", en: "Back" },
+
+  "hero.cta2": { ar: "استكشف الأقسام", en: "Explore Categories" },
+  "hero.b1.t": { ar: "شحن سريع", en: "Fast Delivery" },
+  "hero.b1.s": { ar: "خلال 48 ساعة داخل مصر", en: "Within 48h across Egypt" },
+  "hero.b2.t": { ar: "ضمان أصلي", en: "Genuine Warranty" },
+  "hero.b2.s": { ar: "منتجات أصلية 100%", en: "100% authentic products" },
+  "hero.b3.t": { ar: "الدفع عند الاستلام", en: "Cash on Delivery" },
+  "hero.b3.s": { ar: "ادفع بعد ما تستلم", en: "Pay when it arrives" },
+
+  "feat.1.t": { ar: "توصيل لكل المحافظات", en: "Nationwide Shipping" },
+  "feat.1.s": { ar: "شحن سريع وآمن", en: "Fast and safe delivery" },
+  "feat.2.t": { ar: "خامات بريميوم", en: "Premium Materials" },
+  "feat.2.s": { ar: "اختيار دقيق لكل منتج", en: "Carefully curated picks" },
+  "feat.3.t": { ar: "استبدال خلال 14 يوم", en: "14-Day Returns" },
+  "feat.3.s": { ar: "بدون تعقيد", en: "No hassle, no questions" },
+  "feat.4.t": { ar: "دعم على واتساب", en: "WhatsApp Support" },
+  "feat.4.s": { ar: "متاح طوال اليوم", en: "Available around the clock" },
+
+  "stats.1.n": { ar: "+12,000", en: "12,000+" },
+  "stats.1.t": { ar: "عميل سعيد", en: "Happy customers" },
+  "stats.2.n": { ar: "+120", en: "120+" },
+  "stats.2.t": { ar: "منتج متاح", en: "Products available" },
+  "stats.3.n": { ar: "24/7", en: "24/7" },
+  "stats.3.t": { ar: "دعم فني", en: "Customer support" },
+  "stats.4.n": { ar: "%100", en: "100%" },
+  "stats.4.t": { ar: "منتجات أصلية", en: "Authentic products" },
+
+  "cart.whatsapp": { ar: "إتمام الطلب عبر واتساب", en: "Order via WhatsApp" },
+  "cart.order": { ar: "طلب جديد من صدفة", en: "New SODFA order" },
+  "cart.qtyShort": { ar: "الكمية", en: "Qty" },
 } satisfies Dict;
 
 export type TKey = keyof typeof dict;
