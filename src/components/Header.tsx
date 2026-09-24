@@ -1,13 +1,14 @@
+
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Menu, Search, ShoppingBag, X } from "lucide-react";
-import { Logo } from "./Logo";
 import { useLang } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { cn } from "@/lib/utils";
 
 function LangSwitch({ className }: { className?: string }) {
   const { lang, setLang } = useLang();
+
   return (
     <div
       className={cn(
@@ -19,16 +20,21 @@ function LangSwitch({ className }: { className?: string }) {
         onClick={() => setLang("ar")}
         className={cn(
           "rounded-full px-3 py-1 transition-colors",
-          lang === "ar" ? "bg-sodfa text-primary-foreground" : "text-subtle hover:text-foreground",
+          lang === "ar"
+            ? "bg-sodfa text-primary-foreground"
+            : "text-subtle hover:text-foreground",
         )}
       >
         العربية
       </button>
+
       <button
         onClick={() => setLang("en")}
         className={cn(
           "rounded-full px-3 py-1 transition-colors",
-          lang === "en" ? "bg-sodfa text-primary-foreground" : "text-subtle hover:text-foreground",
+          lang === "en"
+            ? "bg-sodfa text-primary-foreground"
+            : "text-subtle hover:text-foreground",
         )}
       >
         English
@@ -41,10 +47,14 @@ export function Header() {
   const { t } = useLang();
   const { count } = useCart();
   const navigate = useNavigate();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [q, setQ] = useState("");
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  const pathname = useRouterState({
+    select: (s) => s.location.pathname,
+  });
 
   useEffect(() => {
     setMenuOpen(false);
@@ -54,7 +64,14 @@ export function Header() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     setSearchOpen(false);
-    navigate({ to: "/products", search: { q: q || undefined, cat: undefined } });
+
+    navigate({
+      to: "/products",
+      search: {
+        q: q || undefined,
+        cat: undefined,
+      },
+    });
   };
 
   const links = [
@@ -67,8 +84,18 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="mx-auto grid h-16 max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-3 px-4 sm:px-6">
-        <Link to="/" className="shrink-0">
-          <Logo />
+
+        {/* SODFA Logo */}
+        <Link
+          to="/"
+          className="flex shrink-0 items-center"
+          aria-label="SODFA"
+        >
+          <img
+            src="/Asset%202.png"
+            alt="SODFA صدفة"
+            className="h-10 w-auto object-contain"
+          />
         </Link>
 
         <nav className="hidden min-w-0 items-center justify-center gap-7 text-sm md:flex">
@@ -100,6 +127,7 @@ export function Header() {
             className="relative grid h-10 w-10 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
           >
             <ShoppingBag className="h-5 w-5" />
+
             {count > 0 && (
               <span className="bg-sodfa absolute end-1 top-1 grid h-4 min-w-4 place-items-center rounded-full px-1 text-[10px] font-bold text-primary-foreground">
                 {count}
@@ -114,14 +142,21 @@ export function Header() {
             onClick={() => setMenuOpen((v) => !v)}
             className="grid h-10 w-10 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-card hover:text-foreground md:hidden"
           >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {menuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </div>
 
       {searchOpen && (
         <div className="border-t border-border bg-background/95 px-4 py-3 sm:px-6">
-          <form onSubmit={submit} className="mx-auto flex max-w-3xl items-center gap-2">
+          <form
+            onSubmit={submit}
+            className="mx-auto flex max-w-3xl items-center gap-2"
+          >
             <input
               autoFocus
               value={q}
@@ -129,6 +164,7 @@ export function Header() {
               placeholder={t("shop.search")}
               className="h-11 w-full rounded-xl border border-border bg-input px-4 text-sm outline-none placeholder:text-subtle focus:border-primary"
             />
+
             <button
               type="submit"
               className="bg-sodfa h-11 shrink-0 rounded-xl px-5 text-sm font-medium text-primary-foreground"
@@ -154,6 +190,7 @@ export function Header() {
               </Link>
             ))}
           </nav>
+
           <LangSwitch className="mt-4 w-fit" />
         </div>
       )}

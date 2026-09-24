@@ -104,6 +104,13 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  img,
+  video,
+  svg {
+    max-width: 100%;
   }
 
   h1,
@@ -207,4 +214,147 @@
     opacity: 1;
     transform: scale(1.06);
   }
+}
+
+/* SODFA admin product editor: keep the form in the same black / purple visual identity. */
+.sodfa-admin-editor {
+  color: #f7f2ff;
+}
+.sodfa-admin-editor .bg-white,
+.sodfa-admin-editor .bg-slate-50 {
+  background: #0f0b14 !important;
+}
+.sodfa-admin-editor .border-slate-200,
+.sodfa-admin-editor .border-slate-300 {
+  border-color: #30223b !important;
+}
+.sodfa-admin-editor .text-slate-900,
+.sodfa-admin-editor .text-slate-800,
+.sodfa-admin-editor .text-slate-700 {
+  color: #f7f2ff !important;
+}
+.sodfa-admin-editor .text-slate-600,
+.sodfa-admin-editor .text-slate-500,
+.sodfa-admin-editor .text-slate-400 {
+  color: #bda9c9 !important;
+}
+.sodfa-admin-editor input,
+.sodfa-admin-editor textarea,
+.sodfa-admin-editor select {
+  color: #fff !important;
+  background: #09070d !important;
+  border-color: #3b2a49 !important;
+}
+.sodfa-admin-editor input::placeholder,
+.sodfa-admin-editor textarea::placeholder {
+  color: #806c89 !important;
+}
+.sodfa-admin-editor input:focus,
+.sodfa-admin-editor textarea:focus,
+.sodfa-admin-editor select:focus {
+  border-color: #a64cc1 !important;
+  box-shadow: 0 0 0 2px color-mix(in oklab, #a64cc1 18%, transparent);
+}
+.sodfa-admin-editor option {
+  color: #fff;
+  background: #120c18;
+}
+.sodfa-admin-editor .shadow-sm,
+.sodfa-admin-editor .shadow-2xl {
+  box-shadow: 0 20px 60px -35px rgba(0,0,0,.9);
+}
+.sodfa-admin-editor button:not(.bg-blue-600) {
+  color: #f7f2ff;
+}
+.sodfa-admin-editor .ring-slate-200 {
+  --tw-ring-color: #3b2a49 !important;
+}
+.sodfa-admin-editor .hover\:bg-slate-50:hover,
+.sodfa-admin-editor .hover\:bg-slate-100:hover {
+  background: #1b1221 !important;
+}
+.sodfa-admin-editor .bg-blue-600 {
+  background: linear-gradient(135deg, #a64cc1, #6e2d8b) !important;
+}
+.sodfa-admin-editor .hover\:bg-blue-700:hover {
+  background: linear-gradient(135deg, #b45ed0, #7b329b) !important;
+}
+
+/* SODFA v3: darker admin editor with high-contrast controls. */
+.sodfa-admin-editor {
+  --admin-bg: #08060c;
+  --admin-panel: #0f0b14;
+  --admin-input: #050409;
+  --admin-border: #4a315a;
+  --admin-purple: #a64cc1;
+  background: #08060c !important;
+  color: #f8f3ff !important;
+  border-radius: 1.5rem;
+}
+.sodfa-admin-editor > * { background: #08060c !important; }
+.sodfa-admin-editor .bg-white,
+.sodfa-admin-editor .bg-slate-50,
+.sodfa-admin-editor .bg-slate-100 { background: var(--admin-panel) !important; }
+.sodfa-admin-editor .border-slate-200,
+.sodfa-admin-editor .border-slate-300 { border-color: var(--admin-border) !important; }
+.sodfa-admin-editor .text-slate-900,
+.sodfa-admin-editor .text-slate-800,
+.sodfa-admin-editor .text-slate-700,
+.sodfa-admin-editor .text-slate-600 { color: #f8f3ff !important; }
+.sodfa-admin-editor .text-slate-500,
+.sodfa-admin-editor .text-slate-400 { color: #bda9c9 !important; }
+.sodfa-admin-editor input:not([type="checkbox"]):not([type="file"]),
+.sodfa-admin-editor textarea,
+.sodfa-admin-editor select {
+  min-height: 42px;
+  color: #ffffff !important;
+  background-color: var(--admin-input) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: .75rem !important;
+}
+.sodfa-admin-editor input::placeholder,
+.sodfa-admin-editor textarea::placeholder { color: #8f789b !important; opacity: 1 !important; }
+.sodfa-admin-editor input:focus,
+.sodfa-admin-editor textarea:focus,
+.sodfa-admin-editor select:focus {
+  outline: none !important;
+  border-color: var(--admin-purple) !important;
+  box-shadow: 0 0 0 3px rgba(166,76,193,.16) !important;
+}
+.sodfa-admin-editor option { color: #fff !important; background: #0f0b14 !important; }
+.sodfa-admin-editor input[type="checkbox"] { accent-color: #a64cc1; }
+.sodfa-admin-editor button { color: #f8f3ff; }
+.sodfa-admin-editor .hover\:bg-slate-50:hover,
+.sodfa-admin-editor .hover\:bg-slate-100:hover { background: #1b1221 !important; }
+.sodfa-admin-editor .bg-blue-600 { background: linear-gradient(135deg,#a64cc1,#6e2d8b) !important; }
+.sodfa-admin-editor .hover\:bg-blue-700:hover { background: linear-gradient(135deg,#b45ed0,#7b329b) !important; }
+
+/* Product showcase: taller cards + uncropped product photography. */
+.sodfa-product-showcase-card img { object-fit: contain !important; }
+
+
+@keyframes sodfa-image-marquee-ltr {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.sodfa-image-marquee {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 7%, black 93%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 7%, black 93%, transparent);
+}
+
+.sodfa-image-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: sodfa-image-marquee-ltr 28s linear infinite;
+  will-change: transform;
+}
+
+.sodfa-image-marquee-item { flex: 0 0 auto; padding: 0 .45rem; }
+.sodfa-image-marquee:hover .sodfa-image-marquee-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sodfa-image-marquee-track { animation: none; transform: none; }
 }

@@ -1,0 +1,210 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+/*
+ * SODFA design system — dark, premium, cinematic.
+ * All colors in oklch. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle: var(--subtle);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-display: "Space Grotesk", "Cairo", sans-serif;
+  --font-sans: "Cairo", "Inter", sans-serif;
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* #000000 */
+  --background: oklch(0 0 0);
+  /* #FFFFFF */
+  --foreground: oklch(1 0 0);
+  /* #111111 */
+  --card: oklch(0.176 0 0);
+  /* #181818 */
+  --card-hover: oklch(0.221 0 0);
+  --card-foreground: oklch(1 0 0);
+  /* #8E2AA8 */
+  --primary: oklch(0.487 0.213 320.5);
+  --primary-foreground: oklch(1 0 0);
+  /* #C06BCF */
+  --primary-light: oklch(0.674 0.153 320.9);
+  /* #74218F */
+  --primary-dark: oklch(0.408 0.185 318.9);
+  --secondary: oklch(0.176 0 0);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.176 0 0);
+  /* #B8B8B8 */
+  --muted-foreground: oklch(0.784 0 0);
+  /* #777777 */
+  --subtle: oklch(0.559 0 0);
+  --accent: oklch(0.221 0 0);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  /* #272727 */
+  --border: oklch(0.276 0 0);
+  /* #0D0D0D */
+  --input: oklch(0.145 0 0);
+  --ring: oklch(0.487 0.213 320.5);
+
+  --gradient-sodfa: linear-gradient(
+    135deg,
+    var(--primary-light) 0%,
+    oklch(0.53 0.2 320.7) 50%,
+    var(--primary-dark) 100%
+  );
+  --glow-soft: 0 0 40px -10px color-mix(in oklab, var(--primary) 55%, transparent);
+  --glow-strong: 0 0 70px -8px color-mix(in oklab, var(--primary-light) 60%, transparent);
+  --shadow-card: 0 20px 50px -30px oklch(0 0 0 / 0.9);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3 {
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 60%, transparent);
+  }
+}
+
+@utility text-gradient {
+  background-image: var(--gradient-sodfa);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility bg-sodfa {
+  background-image: var(--gradient-sodfa);
+}
+
+@utility glow {
+  box-shadow: var(--glow-soft);
+}
+
+@utility glow-strong {
+  box-shadow: var(--glow-strong);
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+/* Purple shimmer skeleton */
+@utility skeleton {
+  background-color: var(--card);
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--primary) 22%, transparent),
+      transparent
+    );
+    animation: sodfa-shimmer 1.6s infinite;
+  }
+}
+
+@utility fade-up {
+  animation: sodfa-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sodfa-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes sodfa-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sodfa-ken-burns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.16);
+  }
+}
+
+@keyframes sodfa-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}

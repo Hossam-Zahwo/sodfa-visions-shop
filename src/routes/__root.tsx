@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -15,6 +16,7 @@ import { LanguageProvider } from "@/lib/i18n";
 import { CartProvider } from "@/lib/cart";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -81,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SODFA | صدفة — إكسسوارات هاتف بريميوم" },
+      { title: "SODFA" },
       {
         name: "description",
         content: "متجر صدفة لإكسسوارات الهواتف: جرابات، شواحن، كابلات وسماعات بجودة بريميوم.",
@@ -90,15 +92,50 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap",
-      },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-    ],
+  { rel: "stylesheet", href: appCss },
+  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  {
+    rel: "preconnect",
+    href: "https://fonts.gstatic.com",
+    crossOrigin: "anonymous",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap",
+  },
+
+  // SODFA Favicon
+  {
+    rel: "apple-touch-icon",
+    sizes: "180x180",
+    href: "/apple-touch-icon.png",
+  },
+  {
+    rel: "icon",
+    type: "/png",
+    sizes: "32x32",
+    href: "/favicon-32x32.png",
+  },
+  {
+    rel: "icon",
+    type: "/png",
+    sizes: "16x16",
+    href: "/favicon-16x16.png",
+  },
+  {
+    rel: "icon",
+    type: "/x-icon",
+    href: "/favicon.ico",
+  },
+  {
+    rel: "shortcut icon",
+    href: "/favicon.ico",
+  },
+  {
+    rel: "manifest",
+    href: "/site.webmanifest",
+  },
+],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -122,18 +159,25 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith("/admin");
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Toaster position="top-center" richColors />
       <LanguageProvider>
         <CartProvider>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">
-              <Outlet />
-            </main>
-            <Footer />
-          </div>
+          {isAdmin ? (
+            <Outlet />
+          ) : (
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1">
+                <Outlet />
+              </main>
+              <Footer />
+            </div>
+          )}
         </CartProvider>
       </LanguageProvider>
     </QueryClientProvider>
